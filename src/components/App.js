@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Switch } from "react-router-dom";
 
-import { loadToken } from "./store/actions/authentication";
-import { ProtectedRoute, PrivateRoute } from "./utils/route-utils";
-import LoginPanel from './LoginPanel';
-import MainPage from './MainPage';
+import { loadToken } from "../store/actions/authentication";
+import { ProtectedRoute, PrivateRoute } from "../utils/route-utils";
+import Login from './Login';
+import SignUp from './SignUp';
+import Slack from './Slack';
 
 const App = () => {
-  // const [loaded, setLoaded] = useState(false);
   const isNotLoggedIn = useSelector((state) => !state.authentication.token);
   const dispatch = useDispatch();
 
   useEffect(() => { 
     dispatch(loadToken()); 
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -23,12 +23,18 @@ const App = () => {
           path="/login"
           exact={true}
           isNotLoggedIn={isNotLoggedIn}
-          component={LoginPanel}
+          component={Login}
+        />
+        <ProtectedRoute
+          path="/signup"
+          exact={true}
+          isNotLoggedIn={isNotLoggedIn}
+          component={SignUp}
         />
         <PrivateRoute
           path="/"
           isNotLoggedIn={isNotLoggedIn}
-          component={MainPage}
+          component={Slack}
         />
         <Redirect to="/" />
       </Switch>
