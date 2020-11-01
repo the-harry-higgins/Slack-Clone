@@ -1,4 +1,7 @@
-import { baseUrl } from "../../config";
+import { baseAPIUrl } from "../../config";
+import { setChannels } from './channels';
+import { setTheme } from './theme';
+import { setupListeners } from './socket';
 
 const TOKEN_KEY = "slack-clone/authentication/token";
 
@@ -20,43 +23,48 @@ export const loadToken = () => async (dispatch) => {
 };
 
 export const login = (email, password) => async (dispatch) => {
-  const response = await fetch(`${baseUrl}/auth`, {
+  const response = await fetch(`${baseAPIUrl}/auth`, {
     method: "put",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
 
   if (response.ok) {
-    const { token, user } = await response.json();
+    const { token, user, theme, channels } = await response.json();
     window.localStorage.setItem(TOKEN_KEY, token);
     dispatch(setToken(token));
     dispatch(setCurrentUser(user));
+    dispatch(setTheme(theme));
+    dispatch(setChannels(channels));
+    dispatch(setupListeners());
   }
 };
 
 export const logout = () => async (dispatch) => {
-  console.log('LOGGING OUT');
   window.localStorage.removeItem(TOKEN_KEY);
   dispatch(removeToken());
 };
 
 export const verifyToken = () => async (dispatch, getState) => {
   const { authentication: { token } } = getState();
-  const response = await fetch(`${baseUrl}/auth/currentuser`, {
+  const response = await fetch(`${baseAPIUrl}/auth/currentuser`, {
     method: "get",
     headers: { Authorization: `Bearer ${token}` },
   });
 
   if (response.ok) {
-    const { currentuser } = await response.json();
-    dispatch(setCurrentUser(currentuser));
+    const { user, theme, channels } = await response.json();
+    dispatch(setCurrentUser(user));
+    dispatch(setTheme(theme));
+    dispatch(setChannels(channels));
+    dispatch(setupListeners());
   } else {
     dispatch(logout());
   }
 };
 
 export const signUp = (displayName, email, password) => async (dispatch) => {
-  const response = await fetch(`${baseUrl}/users`, {
+  const response = await fetch(`${baseAPIUrl}/users`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ displayName, email, password }),

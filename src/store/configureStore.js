@@ -2,12 +2,22 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import authentication from "./reducers/authentication";
 import currentuser from "./reducers/currentuser";
+import channels from "./reducers/channels";
+import theme from "./reducers/theme";
+import messages from "./reducers/messages";
+import currentchannel from "./reducers/currentchannel";
+import socket from './reducers/socket';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const reducer = combineReducers({
   authentication,
-  currentuser
+  currentuser,
+  channels,
+  theme,
+  currentchannel,
+  messages,
+  socket
 });
 
 const configureStore = (initialState) => {
