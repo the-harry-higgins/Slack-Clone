@@ -10,6 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { NavLink } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,9 +68,9 @@ const SideBar = () => {
                   activeClassName={classes.selected}
                   divider
                 >
-                  <span className={channels.dict[id].notification ? classes.notify : ''}>
+                  <Typography className={channels.dict[id].notification ? classes.notify : ''}>
                     {`# ${channels.dict[id].name}`} 
-                  </span>
+                  </Typography>
                 </ListItem>
               ))}
             </List>

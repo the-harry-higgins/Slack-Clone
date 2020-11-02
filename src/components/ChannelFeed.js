@@ -39,13 +39,10 @@ export default function ChannelFeed() {
   useEffect(() => {
     dispatch(updateCurrentChannel(id));
     dispatch(getMessages(id));
-  }, [id]);
-
-  useEffect(() => {
     if (currentchannel.notification) {
       dispatch(setChannelNotification(id))
     }
-  }, [currentchannel]);
+  }, [id, currentchannel.notification, dispatch]);
 
   useEffect(() => {
     scrollToBottom();

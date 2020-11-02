@@ -27,9 +27,7 @@ const TinyMCEForm = () => {
           menubar: false,
           selector: 'textarea',
           plugins: 'autolink autoresize codesample help link lists preview wordcount',
-          toolbar:
-            'bold | italic | codesample | link |\
-              bullist | numlist | outdent | indent | preview | help ',
+          toolbar: 'bold | italic | codesample | link | bullist | numlist | outdent | indent | preview | help ',
           link_default_protocol: 'https'
         }}
         onChange={handleEditorChange}
@@ -37,8 +35,10 @@ const TinyMCEForm = () => {
       />
       <Button 
         bgcolor="primary.main"
-        color="white"
-        variant="contained" color="primary" type="submit">
+        color="primary"
+        variant="contained"
+        type="submit"
+      >
         Submit
       </Button>
     </form>
