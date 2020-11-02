@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   messageList: {
-    height: '400px',
+    height: '60vh',
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     overflow: 'auto'
