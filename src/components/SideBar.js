@@ -14,12 +14,24 @@ import { NavLink } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    height: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.grey[300]
+  },
+  folder: {
+    color: theme.palette.primary.contrastText
   },
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  notify: {
+    color: theme.palette.primary.contrastText,
+    fontWeight: 900
+  },
+  selected: {
+    backgroundColor: theme.palette.secondary.main
+  }
 }));
 
 const SideBar = () => {
@@ -35,10 +47,10 @@ const SideBar = () => {
   
   return (
     <>
-      <List>
+      <List className={classes.root}>
         <ListItem button onClick={handleClick}>
           <ListItemIcon>
-            <ForumIcon />
+            <ForumIcon className={classes.folder}/>
           </ListItemIcon>
           <ListItemText primary="Channels" />
             {open ? <ExpandLess /> : <ExpandMore />}
@@ -46,8 +58,18 @@ const SideBar = () => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {channels.ids.map((id, index) => (
-                <ListItem button component={NavLink} to={`/channels/${id}`} key={index} className={classes.nested}>
-                  <ListItemText primary={`# ${channels.dict[id].name}`} />
+                <ListItem 
+                  button 
+                  component={NavLink} 
+                  to={`/channels/${id}`} 
+                  key={index} 
+                  className={classes.nested}
+                  activeClassName={classes.selected}
+                  divider
+                >
+                  <span className={channels.dict[id].notification ? classes.notify : ''}>
+                    {`# ${channels.dict[id].name}`} 
+                  </span>
                 </ListItem>
               ))}
             </List>

@@ -1,8 +1,8 @@
-import { SET_CHANNELS } from "../actions/channels";
+import { SET_CHANNELS, SET_CHANNEL_NOTIFICATION } from "../actions/channels";
 
 export default function reducer(state = {}, action) {
   switch (action.type) {
-    case SET_CHANNELS: {
+    case SET_CHANNELS:
       let dict = {};
       let ids = [];
       action.channels.forEach(channel => {
@@ -10,7 +10,15 @@ export default function reducer(state = {}, action) {
         ids.push(channel.id);
       });
       return { dict, ids };
-    }
+    
+    case SET_CHANNEL_NOTIFICATION:
+      const updatedChannel = {...state.dict[action.id]}
+      updatedChannel.notification = !updatedChannel.notification;
+      return { 
+        ids: [...state.ids], 
+        dict: {...state.dict, [action.id]: updatedChannel}
+      };
+      
     default:
       return state;
   }

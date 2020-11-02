@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Nav from './Nav';
@@ -7,9 +8,6 @@ import ResponsiveDrawer from './ResponsiveDrawer';
 import ChannelFeed from './ChannelFeed';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -27,7 +25,7 @@ function Slack(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <Box display='flex'>
       <Nav handleDrawerToggle={handleDrawerToggle}/>
       <ResponsiveDrawer handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
       <main className={classes.content}>
@@ -41,7 +39,7 @@ function Slack(props) {
           <Redirect to="/" />
         </Switch>
       </main>
-    </div>
+    </Box>
   );
 }
 

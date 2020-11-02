@@ -48,50 +48,45 @@ export default function SignUp() {
           Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="fname"
-                name="displayName"
-                variant="outlined"
-                required
-                fullWidth
-                id="displayName"
-                label="Display Name"
-                autoFocus
-                value={displayName}
-                onChange={updateDisplayName}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                type="email"
-                value={email}
-                onChange={updateEmail}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={updatePassword}
-              />
-            </Grid>
-          </Grid>
+          <TextField
+            autoComplete="fname"
+            name="displayName"
+            variant="outlined"
+            required
+            fullWidth
+            id="displayName"
+            label="Display Name"
+            autoFocus
+            margin="normal"
+            value={displayName}
+            onChange={updateDisplayName}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            type="email"
+            value={email}
+            onChange={updateEmail}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={updatePassword}
+          />
           <Button
             type="submit"
             fullWidth

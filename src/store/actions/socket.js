@@ -1,3 +1,6 @@
+import { addMessage } from './messages';
+import { setChannelNotification } from './channels';
+
 export const SET_SOCKET = 'slack-clone/socket/SET_SOCKET';
 
 export const setSocket = socket => ({ type: SET_SOCKET, socket });
@@ -5,27 +8,23 @@ export const setSocket = socket => ({ type: SET_SOCKET, socket });
 export const setupListeners = () => async (dispatch, getState) => {
   const { channels, socket } = getState();
   console.log('Setting up listeners', channels.ids);
-  console.log(socket);
   socket.emit('join rooms', channels.ids);
   channels.ids.forEach(id => {
-    socket.on(id, ({ user, message }) => {
-      console.log(`Recieved new message for channel ${id}: ${message} -- ${user.displayName}` );
-      // If the current channel doesn't match the
-      // channel the message belongs to, then
-      // don't add the message because it shouldn't
-      // display
-      // dispatch(addMessage(message));
+    socket.on(id, (message) => {
+      console.log(`Recieved new message for channel ${id}: ${message}`);
+      dispatch(handleNewMessage(message, id));
     });
   });
 }
 
-export const addMessage = (message) => async (dispatch, getState) => {
+export const handleNewMessage = (message, id) => async (dispatch, getState) => {
   const { currentchannel } = getState();
-  console.log('Adding Message', currentchannel, message);
-  if (currentchannel.id === message.channelId) {
+  if (currentchannel.id === id) {
     // Add message to messages
+    dispatch(addMessage(message));
   } else {
     // Set notification setting on the channel
+    dispatch(setChannelNotification(id));
   }
 }
 

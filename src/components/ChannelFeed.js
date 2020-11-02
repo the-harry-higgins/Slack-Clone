@@ -2,11 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import {Container, List } from '@material-ui/core';
+import { Container, Divider, List } from '@material-ui/core';
 import { getMessages } from '../store/actions/messages';
 import { updateCurrentChannel } from '../store/actions/currentchannel';
 import MessageCard from './MessageCard';
 import TinyMCEForm from './TinyMCEForm';
+import { setChannelNotification } from '../store/actions/channels';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,12 @@ export default function ChannelFeed() {
   }, [id]);
 
   useEffect(() => {
+    if (currentchannel.notification) {
+      dispatch(setChannelNotification(id))
+    }
+  }, [currentchannel]);
+
+  useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
@@ -50,18 +57,21 @@ export default function ChannelFeed() {
       <List className={classes.messageList}>
         {messages.map(message => {
           return (
-            <MessageCard
-              key={message.id}
-              id={message.id}
-              displayName={message.displayName}
-              profileImage={message.profileImage}
-              sent={message.createdAt} 
-              content={message.content}
-            />
+            <React.Fragment key={`fragment-${message.id}`}>
+              <Divider key={`divider-${message.id}`}/>
+              <MessageCard
+                key={message.id}
+                id={message.id}
+                displayName={message.displayName}
+                profileImage={message.profileImage}
+                sent={message.createdAt}
+                content={message.content}
+              />
+            </React.Fragment>
           );
         })
         }
-        <div ref={anchorRef} className={classes.anchor}/>
+        <div ref={anchorRef} className={classes.anchor} />
       </List>
       <TinyMCEForm />
     </Container>
