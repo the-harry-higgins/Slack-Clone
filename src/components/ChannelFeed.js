@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Divider, List } from '@material-ui/core';
+import { Container, Divider, List, Typography } from '@material-ui/core';
 import { getMessages } from '../store/actions/messages';
 import { updateCurrentChannel } from '../store/actions/currentchannel';
 import MessageCard from './MessageCard';
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   messageList: {
-    height: '60vh',
+    height: '50vh',
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     overflow: 'auto'
@@ -50,7 +50,7 @@ export default function ChannelFeed() {
 
   return (
     <Container className={classes.root}>
-      <h1>{currentchannel.name}</h1>
+      <Typography variant='h4'>{currentchannel.name}</Typography>
       <List className={classes.messageList}>
         {messages.map(message => {
           return (
