@@ -43,38 +43,52 @@ const SideBar = () => {
   const handleClick = () => {
     setOpen(!open);
   };
-  
+
   if (Object.keys(channels).length === 0) return null;
-  
+
   return (
     <>
       <List className={classes.root}>
+        <ListItem
+          button
+          component={NavLink}
+          to={`/all-dms`}
+        >
+          <Typography>All DMs</Typography>
+        </ListItem>
+        <ListItem
+          button
+          component={NavLink}
+          to={`/browse-channels`}
+        >
+          <Typography>Channel browser</Typography>
+        </ListItem>
         <ListItem button onClick={handleClick}>
+          {open ? <ExpandLess /> : <ExpandMore />}
           <ListItemIcon>
-            <ForumIcon className={classes.folder}/>
+            <ForumIcon className={classes.folder} />
           </ListItemIcon>
           <ListItemText primary="Channels" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {channels.ids.map((id, index) => (
-                <ListItem 
-                  button 
-                  component={NavLink} 
-                  to={`/channels/${id}`} 
-                  key={index} 
-                  className={classes.nested}
-                  activeClassName={classes.selected}
-                  divider
-                >
-                  <Typography className={channels.dict[id].notification ? classes.notify : ''}>
-                    {`# ${channels.dict[id].name}`} 
-                  </Typography>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>   
+        </ListItem>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {channels.ids.map((id, index) => (
+              <ListItem
+                button
+                component={NavLink}
+                to={`/channels/${id}`}
+                key={index}
+                className={classes.nested}
+                activeClassName={classes.selected}
+                divider
+              >
+                <Typography className={channels.dict[id].notification ? classes.notify : ''}>
+                  {`# ${channels.dict[id].name}`}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
       </List>
     </>
   );

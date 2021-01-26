@@ -6,6 +6,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Nav from './Nav';
 import ResponsiveDrawer from './ResponsiveDrawer';
 import ChannelFeed from './ChannelFeed';
+import ChannelBrowser from './ChannelBrowser';
+import AllDms from './AllDms';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -36,6 +38,12 @@ function Slack(props) {
             path="/channels/:id"
             render={(props) => <ChannelFeed {...props} />}
           />
+          <Route exact={true} path="/browse-channels">
+            <ChannelBrowser/>
+          </Route>
+          <Route exact={true} path="/all-dms">
+            <AllDms />
+          </Route>
           <Redirect to="/" />
         </Switch>
       </main>
