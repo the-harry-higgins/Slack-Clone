@@ -6,7 +6,7 @@ import { Container, Divider, List, Typography } from '@material-ui/core';
 import { getMessages } from '../store/actions/messages';
 import { updateCurrentChannel } from '../store/actions/currentchannel';
 import MessageCard from './MessageCard';
-import TinyMCEForm from './TinyMCEForm';
+import MessageForm from './MessageForm';
 import { setChannelNotification } from '../store/actions/channels';
 
 
@@ -70,7 +70,7 @@ export default function ChannelFeed() {
         }
         <div ref={anchorRef} className={classes.anchor} />
       </List>
-      <TinyMCEForm />
+      <MessageForm />
     </Container>
   );
 }
