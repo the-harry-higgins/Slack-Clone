@@ -28,7 +28,9 @@ export default function MessageCard({id, displayName, profileImage, sent, conten
   return (
     <ListItem className={classes.root} key={`listitem-${id}`}>
       <ListItemAvatar key={`listitemavatar-${id}`}>
-        <Avatar key={`avatar-${id}`} alt={displayName} src={profileImage}/>
+        <Avatar key={`avatar-${id}`} alt={displayName} 
+        // src={profileImage}
+        />
       </ListItemAvatar>
       <div key={`column-${id}`} className={classes.column}>
         <ListItemText
