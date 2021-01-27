@@ -4,7 +4,7 @@ import { Typography, List, ListItem } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { baseAPIUrl } from "../config";
 import { makeStyles } from '@material-ui/core/styles';
-import { joinChannelThunk } from '../store/actions/channels';
+import { joinChannelThunk, leaveChannelThunk } from '../store/actions/channels';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,6 +80,21 @@ const ChannelBrowser = () => {
     dispatch(joinChannelThunk(channel));
   }
 
+  const handleLeave = (channel) => (event) => {
+    event.preventDefault();
+    dispatch(leaveChannelThunk(channel));
+  }
+
+  const handleCreate = (channel) => (event) => {
+    event.preventDefault();
+    dispatch(joinChannelThunk(channel));
+  }
+
+  const handleDelete = (channel) => (event) => {
+    event.preventDefault();
+    dispatch(joinChannelThunk(channel));
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.title}>
@@ -90,7 +105,8 @@ const ChannelBrowser = () => {
         <Typography>{matchingChannels.length} channels</Typography>
       </div>
       <List component="div" className={classes.channelsContainer}>
-        {matchingChannels.map(channel => (
+        {matchingChannels.length ? 
+        matchingChannels.map(channel => (
           <ListItem
             button
             component={NavLink}
@@ -108,13 +124,17 @@ const ChannelBrowser = () => {
               </div>
             </div>
             {channels.ids.includes(channel.id) ?
-              <div>
-                Joined
-              </div> :
+              <button onClick={handleLeave(channel)}>Leave</button> :
               <button onClick={handleJoin(channel)}>Join</button>
             }
+            <button onClick={handleDelete(channel)}>Delete</button>
           </ListItem>
-        ))}
+        )) :
+          <ListItem component='div'>
+            <Typography>Create a new {searchTerm} channel?</Typography>
+            <button onClick={handleCreate(searchTerm)}>Create</button>
+          </ListItem>
+        }
       </List>
     </div>
   )

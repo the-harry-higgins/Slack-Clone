@@ -29,6 +29,16 @@ export const addListenerForChannel = (channel) => async(dispatch, getState) => {
 }
 
 
+export const removeListenerForChannel = (channel) => async (dispatch, getState) => {
+  // const { socket } = getState();
+  // socket.emit('join rooms', [channel.id]);
+  // socket.on(channel.id, (message) => {
+  //   dispatch(handleNewMessage(message, channel.id));
+  // });
+  // TODO: exit room
+}
+
+
 export const handleNewMessage = (message, id) => async (dispatch, getState) => {
   const { currentchannel } = getState();
   if (currentchannel.id === id) {

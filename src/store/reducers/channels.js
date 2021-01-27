@@ -1,6 +1,5 @@
-import { SET_CHANNELS, SET_CHANNEL_NOTIFICATION } from "../actions/channels";
+import { JOIN_CHANNEL, LEAVE_CHANNEL, SET_CHANNELS, SET_CHANNEL_NOTIFICATION } from "../actions/channels";
 import { SET_LOGIN_DATA } from "../actions/authentication";
-import { JOIN_CHANNEL } from "../actions/channels";
 
 export default function reducer(state = {}, action) {
   switch (action.type) {
@@ -31,6 +30,18 @@ export default function reducer(state = {}, action) {
         ids: [...state.ids, action.channel.id],
         dict: {...state.dict, [action.channel.id]: action.channel}
       };
+
+    case LEAVE_CHANNEL:
+      const ids = [...state.ids]
+      const index = state.ids.indexOf(action.channel.id);
+      ids.splice(index, 1);
+
+      const dict = {...state.dict};
+      delete dict[action.channel.id];
+      return {
+        ids,
+        dict
+      }
       
     default:
       return state;
