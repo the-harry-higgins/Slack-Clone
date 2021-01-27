@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, List, ListItem } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-
 import { baseAPIUrl } from "../config";
 import { makeStyles } from '@material-ui/core/styles';
+import { joinChannelThunk } from '../store/actions/channels';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +47,7 @@ const ChannelBrowser = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const token = useSelector((state) => state.authentication.token);
   const channels = useSelector((state) => state.channels);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +60,7 @@ const ChannelBrowser = () => {
       setMatchingChannels(channels);
     }
     fetchData();
-  }, [token]);
+  }, [token, channels]);
 
   const search = (event) => {
     const term = event.target.value.toLowerCase();
@@ -74,9 +75,9 @@ const ChannelBrowser = () => {
     }
   }
 
-  const handleJoin = (channelId) => (event) => {
+  const handleJoin = (channel) => (event) => {
     event.preventDefault();
-    dispatch(joinChannel(channelId));
+    dispatch(joinChannelThunk(channel));
   }
 
   return (
@@ -110,7 +111,7 @@ const ChannelBrowser = () => {
               <div>
                 Joined
               </div> :
-              <button onClick={handleJoin(channel.id)}>Join</button>
+              <button onClick={handleJoin(channel)}>Join</button>
             }
           </ListItem>
         ))}
