@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import SearchIcon from '@material-ui/icons/Search';
 import { NavLink } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 
@@ -37,11 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
 const SideBar = () => {
   const channels = useSelector((state) => state.channels);
+  const directMessages = useSelector((state) => state.directMessages);
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [openChannels, setOpenChannels] = React.useState(true);
+  const [openDms, setOpenDms] = React.useState(true);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleChannelsClick = () => {
+    setOpenChannels(!openChannels);
+  };
+
+  const handleDmsClick = () => {
+    setOpenDms(!openDms);
   };
 
   if (Object.keys(channels).length === 0) return null;
@@ -54,6 +61,9 @@ const SideBar = () => {
           component={NavLink}
           to={`/all-dms`}
         >
+          <ListItemIcon>
+            <SearchIcon className={classes.folder} />
+          </ListItemIcon>
           <Typography>All DMs</Typography>
         </ListItem>
         <ListItem
@@ -61,16 +71,19 @@ const SideBar = () => {
           component={NavLink}
           to={`/browse-channels`}
         >
-          <Typography>Channel browser</Typography>
-        </ListItem>
-        <ListItem button onClick={handleClick}>
-          {open ? <ExpandLess /> : <ExpandMore />}
           <ListItemIcon>
             <ForumIcon className={classes.folder} />
           </ListItemIcon>
+          <Typography>Channel browser</Typography>
+        </ListItem>
+
+        <ListItem button onClick={handleChannelsClick}>
+          <ListItemIcon>
+            {openChannels ? <ExpandLess className={classes.folder} /> : <ExpandMore className={classes.folder} />}
+          </ListItemIcon>
           <ListItemText primary="Channels" />
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={openChannels} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {channels.ids.map((id, index) => (
               <ListItem
@@ -84,6 +97,32 @@ const SideBar = () => {
               >
                 <Typography className={channels.dict[id].notification ? classes.notify : ''}>
                   {`# ${channels.dict[id].name}`}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+
+        <ListItem button onClick={handleDmsClick}>
+          <ListItemIcon>
+            {openDms ? <ExpandLess className={classes.folder} /> : <ExpandMore className={classes.folder} />}
+          </ListItemIcon>
+          <ListItemText primary="Direct messages" />
+        </ListItem>
+        <Collapse in={openDms} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {directMessages.ids.map((id, index) => (
+              <ListItem
+                button
+                component={NavLink}
+                to={`/channels/${id}`}
+                key={index}
+                className={classes.nested}
+                activeClassName={classes.selected}
+                divider
+              >
+                <Typography className={directMessages.dict[id].notification ? classes.notify : ''}>
+                  {`# ${directMessages.dict[id].name}`}
                 </Typography>
               </ListItem>
             ))}

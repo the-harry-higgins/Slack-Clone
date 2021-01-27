@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import authentication from "./reducers/authentication";
 import currentuser from "./reducers/currentuser";
 import channels from "./reducers/channels";
+import directMessages from "./reducers/directMessages";
 import theme from "./reducers/theme";
 import messages from "./reducers/messages";
 import currentchannel from "./reducers/currentchannel";
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   authentication,
   currentuser,
   channels,
+  directMessages,
   theme,
   currentchannel,
   messages,

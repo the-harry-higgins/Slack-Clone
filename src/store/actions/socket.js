@@ -6,9 +6,14 @@ export const SET_SOCKET = 'slack-clone/socket/SET_SOCKET';
 export const setSocket = socket => ({ type: SET_SOCKET, socket });
 
 export const setupListeners = () => async (dispatch, getState) => {
-  const { channels, socket } = getState();
-  socket.emit('join rooms', channels.ids);
+  const { channels, directMessages, socket } = getState();
+  socket.emit('join rooms', [...channels.ids, ...directMessages.ids]);
   channels.ids.forEach(id => {
+    socket.on(id, (message) => {
+      dispatch(handleNewMessage(message, id));
+    });
+  });
+  directMessages.ids.forEach(id => {
     socket.on(id, (message) => {
       dispatch(handleNewMessage(message, id));
     });

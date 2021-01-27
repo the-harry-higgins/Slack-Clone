@@ -1,18 +1,21 @@
 import { baseAPIUrl } from "../../config";
-import { setChannels } from './channels';
-import { setTheme } from './theme';
 import { setupListeners } from './socket';
 
 const TOKEN_KEY = "slack-clone/authentication/token";
 
 export const SET_TOKEN = "slack-clone/authentication/SET_TOKEN";
 export const REMOVE_TOKEN = "slack-clone/authentication/REMOVE_TOKEN";
-export const SET_CURRENT_USER = "slack-clone/authentication/SET_CURRENT_USER";
-
+export const SET_LOGIN_DATA = "slack-clone/authentication/SET_LOGIN_DATA";
 
 export const setToken = (token) => ({ type: SET_TOKEN, token });
 export const removeToken = () => ({ type: REMOVE_TOKEN });
-export const setCurrentUser = (user) => ({ type: SET_CURRENT_USER, user });
+export const setLoginData = (data) => ({ 
+  type: SET_LOGIN_DATA, 
+  user: data.user,
+  theme: data.theme,
+  channels: data.channels,
+  directMessages: data.directMessages
+ });
 
 export const loadToken = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN_KEY);
@@ -30,12 +33,10 @@ export const login = (email, password) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const { token, user, theme, channels } = await response.json();
-    window.localStorage.setItem(TOKEN_KEY, token);
-    dispatch(setToken(token));
-    dispatch(setCurrentUser(user));
-    dispatch(setTheme(theme));
-    dispatch(setChannels(channels));
+    const data = await response.json();
+    window.localStorage.setItem(TOKEN_KEY, data.token);
+    dispatch(setToken(data.token));
+    dispatch(setLoginData(data));
     dispatch(setupListeners());
   }
 };
@@ -53,10 +54,8 @@ export const verifyToken = () => async (dispatch, getState) => {
   });
 
   if (response.ok) {
-    const { user, theme, channels } = await response.json();
-    dispatch(setCurrentUser(user));
-    dispatch(setTheme(theme));
-    dispatch(setChannels(channels));
+    const data = await response.json();
+    dispatch(setLoginData(data));
     dispatch(setupListeners());
   } else {
     dispatch(logout());
@@ -71,9 +70,9 @@ export const signUp = (displayName, email, password) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const { token, user } = await response.json();
-    window.localStorage.setItem(TOKEN_KEY, token);
-    dispatch(setToken(token));
-    dispatch(setCurrentUser(user));
+    const data = await response.json();
+    window.localStorage.setItem(TOKEN_KEY, data.token);
+    dispatch(setToken(data.token));
+    dispatch(setLoginData(data));
   }
 };

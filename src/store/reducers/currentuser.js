@@ -1,8 +1,8 @@
-import { SET_CURRENT_USER } from "../actions/authentication";
+import { SET_LOGIN_DATA } from "../actions/authentication";
 
 export default function reducer(state = {}, action) {
   switch (action.type) {
-    case SET_CURRENT_USER:
+    case SET_LOGIN_DATA:
       return action.user;
 
     default:
