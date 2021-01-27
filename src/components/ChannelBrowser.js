@@ -1,14 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
+import { baseAPIUrl } from "../config";
+
 
 const ChannelBrowser = () => {
   const [allChannels, setAllChannels] = useState([]);
+  const [matchingChannels, setMatchingChannels] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const token = useSelector((state) => state.authentication.token);
 
   useEffect(() => {
-    // const data = await fetch('')
-    const data = ['channel1', 'channel2', 'channel3', 'channel4', 'channel5',];
-    setAllChannels(data);
-  }, []);
+    const fetchData = async () => {
+      const response = await fetch(`${baseAPIUrl}/channels/`, {
+        method: "get",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const { channels } = await response.json();
+      console.log(channels);
+      setAllChannels(channels);
+      setMatchingChannels(channels);
+    }
+    fetchData();
+  }, [token]);
+
+  const search = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+    if (term.length === 0) {
+      setMatchingChannels(allChannels);
+    } else {
+      const newMatchingChannels = allChannels.filter(channel => {
+        return channel.name.toLowerCase().includes(term);
+      });
+      setMatchingChannels(newMatchingChannels);
+    }
+  }
 
   return (
     <div>
@@ -16,14 +43,16 @@ const ChannelBrowser = () => {
         <Typography variant='h4'>Channel browser</Typography>
       </div>
       <div>
-        <label for="search">Search</label>
-        <input type="text" id="search"></input>
-        <Typography>{allChannels.length} channels</Typography>
+        <label>
+          Search
+          <input type="text" value={searchTerm} onChange={search}/>
+        </label>
+        <Typography>{matchingChannels.length} channels</Typography>
       </div>
       <div>
-        {allChannels.map(channel => (
+        {matchingChannels.map(channel => (
           <div>
-            {channel}
+            {channel.name}
           </div>
         ))}
       </div>
