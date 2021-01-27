@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Typography, List, ListItem } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 
@@ -76,7 +76,7 @@ const ChannelBrowser = () => {
 
   const handleJoin = (channelId) => (event) => {
     event.preventDefault();
-    console.log(channelId);
+    dispatch(joinChannel(channelId));
   }
 
   return (
@@ -106,7 +106,12 @@ const ChannelBrowser = () => {
                 {channel.members} members
               </div>
             </div>
-            <button onClick={handleJoin(channel.id)}>Join</button>
+            {channels.ids.includes(channel.id) ?
+              <div>
+                Joined
+              </div> :
+              <button onClick={handleJoin(channel.id)}>Join</button>
+            }
           </ListItem>
         ))}
       </List>
