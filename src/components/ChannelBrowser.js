@@ -4,7 +4,9 @@ import { Typography, List, ListItem } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { baseAPIUrl } from "../config";
 import { makeStyles } from '@material-ui/core/styles';
-import { joinChannelThunk, leaveChannelThunk } from '../store/actions/channels';
+import {
+  joinChannelThunk, leaveChannelThunk, deleteChannelThunk, createChannelThunk
+} from '../store/actions/channels';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,14 +87,14 @@ const ChannelBrowser = () => {
     dispatch(leaveChannelThunk(channel));
   }
 
-  const handleCreate = (channel) => (event) => {
+  const handleCreate = (channelName) => (event) => {
     event.preventDefault();
-    dispatch(joinChannelThunk(channel));
+    dispatch(createChannelThunk(channelName));
   }
 
   const handleDelete = (channel) => (event) => {
     event.preventDefault();
-    dispatch(joinChannelThunk(channel));
+    dispatch(deleteChannelThunk(channel));
   }
 
   return (
@@ -105,31 +107,31 @@ const ChannelBrowser = () => {
         <Typography>{matchingChannels.length} channels</Typography>
       </div>
       <List component="div" className={classes.channelsContainer}>
-        {matchingChannels.length ? 
-        matchingChannels.map(channel => (
-          <ListItem
-            button
-            component={NavLink}
-            to={`/channels/${channel.id}`}
-            key={`${channel.name}`}
-            className={classes.channel}
-            divider
-          >
-            <div>
+        {matchingChannels.length ?
+          matchingChannels.map(channel => (
+            <ListItem
+              button
+              component={NavLink}
+              to={`/channels/${channel.id}`}
+              key={`${channel.name}`}
+              className={classes.channel}
+              divider
+            >
               <div>
-                {channel.name}
+                <div>
+                  {channel.name}
+                </div>
+                <div>
+                  {channel.members} members
               </div>
-              <div>
-                {channel.members} members
               </div>
-            </div>
-            {channels.ids.includes(channel.id) ?
-              <button onClick={handleLeave(channel)}>Leave</button> :
-              <button onClick={handleJoin(channel)}>Join</button>
-            }
-            <button onClick={handleDelete(channel)}>Delete</button>
-          </ListItem>
-        )) :
+              {channels.ids.includes(channel.id) ?
+                <button onClick={handleLeave(channel)}>Leave</button> :
+                <button onClick={handleJoin(channel)}>Join</button>
+              }
+              <button onClick={handleDelete(channel)}>Delete</button>
+            </ListItem>
+          )) :
           <ListItem component='div'>
             <Typography>Create a new {searchTerm} channel?</Typography>
             <button onClick={handleCreate(searchTerm)}>Create</button>

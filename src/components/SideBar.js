@@ -51,7 +51,7 @@ const SideBar = () => {
     setOpenDms(!openDms);
   };
 
-  if (Object.keys(channels).length === 0) return null;
+  // if (Object.keys(channels).length === 0) return null;
 
   return (
     <>
@@ -85,21 +85,24 @@ const SideBar = () => {
         </ListItem>
         <Collapse in={openChannels} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {channels.ids.map((id, index) => (
-              <ListItem
-                button
-                component={NavLink}
-                to={`/channels/${id}`}
-                key={index}
-                className={classes.nested}
-                activeClassName={classes.selected}
-                divider
-              >
-                <Typography className={channels.dict[id].notification ? classes.notify : ''}>
-                  {`# ${channels.dict[id].name}`}
-                </Typography>
-              </ListItem>
-            ))}
+            {channels.ids ?
+              channels.ids.map((id, index) => (
+                <ListItem
+                  button
+                  component={NavLink}
+                  to={`/channels/${id}`}
+                  key={index}
+                  className={classes.nested}
+                  activeClassName={classes.selected}
+                  divider
+                >
+                  <Typography className={channels.dict[id].notification ? classes.notify : ''}>
+                    {`# ${channels.dict[id].name}`}
+                  </Typography>
+                </ListItem>
+              )) :
+              null
+            }
           </List>
         </Collapse>
 
@@ -111,21 +114,24 @@ const SideBar = () => {
         </ListItem>
         <Collapse in={openDms} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {directMessages.ids.map((id, index) => (
-              <ListItem
-                button
-                component={NavLink}
-                to={`/channels/${id}`}
-                key={index}
-                className={classes.nested}
-                activeClassName={classes.selected}
-                divider
-              >
-                <Typography className={directMessages.dict[id].notification ? classes.notify : ''}>
-                  {`# ${directMessages.dict[id].name}`}
-                </Typography>
-              </ListItem>
-            ))}
+            {directMessages.ids ?
+              directMessages.ids.map((id, index) => (
+                <ListItem
+                  button
+                  component={NavLink}
+                  to={`/channels/${id}`}
+                  key={index}
+                  className={classes.nested}
+                  activeClassName={classes.selected}
+                  divider
+                >
+                  <Typography className={directMessages.dict[id].notification ? classes.notify : ''}>
+                    {`# ${directMessages.dict[id].name}`}
+                  </Typography>
+                </ListItem>
+              )) :
+              null
+            }
           </List>
         </Collapse>
       </List>
