@@ -1,4 +1,5 @@
 import { 
+  CREATE_CHANNEL,
   DELETE_CHANNEL, JOIN_CHANNEL, LEAVE_CHANNEL, SET_CHANNELS, SET_CHANNEL_NOTIFICATION 
 } from "../actions/channels";
 import { SET_LOGIN_DATA } from "../actions/authentication";
@@ -44,6 +45,18 @@ export default function reducer(state = {}, action) {
       return {
         ids,
         dict
+      }
+
+    case CREATE_CHANNEL:
+      const _ids = [...state.ids]
+      _ids.unshift(action.channel.id);
+
+      const _dict = {...state.dict}
+      _dict[action.channel.id] = action.channel;
+
+      return {
+        ids: _ids,
+        dict: _dict
       }
       
     default:
