@@ -50,7 +50,7 @@ export default function ChannelFeed() {
 
   return (
     <Container className={classes.root}>
-      {currentchannel.channelTypeId === 3 ?
+      {currentchannel.type === 'directmessage' ?
         <Typography variant='h4'>{currentchannel.otherUser.displayName}</Typography> :
         <Typography variant='h4'>{currentchannel.name}</Typography>
       }

@@ -56,7 +56,7 @@ const AllDms = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${baseAPIUrl}/directMessages/all/users/${currentuser.id}/`,
+        `${baseAPIUrl}/directMessages/`,
         {
           method: "get",
           headers: {
@@ -67,7 +67,7 @@ const AllDms = () => {
       setDmPreviews(dms);
     }
     fetchData();
-  }, [token, directMessages]);
+  }, [token, directMessages, currentuser.id]);
 
   const search = (event) => {
     const term = event.target.value;

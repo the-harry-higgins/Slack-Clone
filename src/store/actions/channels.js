@@ -20,19 +20,17 @@ export const createChannel = data => ({
 });
 
 export const joinChannelThunk = (channel) => async (dispatch, getState) => {
-  const { authentication: { token }, currentuser } = getState();
+  const { authentication: { token } } = getState();
   const response = await fetch(`${baseAPIUrl}/channels/${channel.id}/`, {
     method: "post",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ userId: currentuser.id }),
   });
 
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
     dispatch(joinChannel(channel));
     dispatch(addListenerForChannel(channel));
   }
@@ -40,10 +38,10 @@ export const joinChannelThunk = (channel) => async (dispatch, getState) => {
 
 export const leaveChannelThunk = (channel) => async (dispatch, getState) => {
 
-  const { authentication: { token }, currentuser } = getState();
+  const { authentication: { token } } = getState();
 
   const response = await fetch(
-    `${baseAPIUrl}/channels/${channel.id}/users/${currentuser.id}`, {
+    `${baseAPIUrl}/channels/${channel.id}/leave/`, {
     method: "delete",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -89,7 +87,6 @@ export const createChannelThunk = (channelName) => async (dispatch, getState) =>
 
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
     dispatch(createChannel(data));
     dispatch(addListenerForChannel(data.channel));
   }

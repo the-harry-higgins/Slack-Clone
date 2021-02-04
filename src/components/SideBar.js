@@ -77,7 +77,10 @@ const SideBar = () => {
 
         <ListItem button onClick={handleChannelsClick}>
           <ListItemIcon>
-            {openChannels ? <ExpandLess className={classes.folder} /> : <ExpandMore className={classes.folder} />}
+            {openChannels ?
+              <ExpandLess className={classes.folder} /> :
+              <ExpandMore className={classes.folder} />
+            }
           </ListItemIcon>
           <ListItemText primary="Channels" />
         </ListItem>
@@ -106,7 +109,10 @@ const SideBar = () => {
 
         <ListItem button onClick={handleDmsClick}>
           <ListItemIcon>
-            {openDms ? <ExpandLess className={classes.folder} /> : <ExpandMore className={classes.folder} />}
+            {openDms ?
+              <ExpandLess className={classes.folder} /> :
+              <ExpandMore className={classes.folder} />
+            }
           </ListItemIcon>
           <ListItemText primary="Direct messages" />
         </ListItem>
@@ -124,7 +130,7 @@ const SideBar = () => {
                   divider
                 >
                   <Typography className={directMessages.dict[id].notification ? classes.notify : ''}>
-                    {`# ${directMessages.dict[id].otherUser.displayName}`}
+                    {`${directMessages.dict[id].otherUser.displayName}`}
                   </Typography>
                 </ListItem>
               )) :

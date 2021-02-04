@@ -5,7 +5,8 @@ export const setCurrentChannel = currentchannel => ({ type: SET_CURRENT_CHANNEL,
 export const updateCurrentChannel = id => async(dispatch, getState) => {
   const { channels, directMessages } = getState();
 
-  const currentchannel = channels.ids.includes(id) ? 
+  const currentchannel = channels.ids.includes(parseInt(id)) ? 
     {...channels.dict[id]} : {...directMessages.dict[id]};
-  dispatch(setCurrentChannel(currentchannel)); 
+
+    dispatch(setCurrentChannel(currentchannel)); 
 }

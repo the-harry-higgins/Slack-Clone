@@ -26,9 +26,7 @@ const CurrentUser = ({ currentuser, logout }) => {
   return (
     <div>
       <IconButton onClick={handleClick} color="inherit" >
-        <Avatar alt={currentuser.displayName} src={currentuser.profileImage}>
-          {/* {currentuser.displayName[0]} */}
-        </Avatar>
+        <Avatar alt={currentuser.displayName} src={currentuser.profileImage} />
       </IconButton>
       <Menu
         id="simple-menu"
@@ -37,6 +35,7 @@ const CurrentUser = ({ currentuser, logout }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem disabled >{currentuser.displayName}</MenuItem>
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </div>
@@ -49,9 +48,9 @@ const CurrentUserContainer = () => {
   const dispatch = useDispatch();
 
   return (
-    <CurrentUser 
-    currentuser={currentuser}
-    logout={() => dispatch(logout())} />
+    <CurrentUser
+      currentuser={currentuser}
+      logout={() => dispatch(logout())} />
   );
 }
 
