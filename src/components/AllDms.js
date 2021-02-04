@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, List, ListItem } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { baseAPIUrl } from "../config";
 import { makeStyles } from '@material-ui/core/styles';
+import { createDmChannelThunk } from '../store/actions/directMessages';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,7 @@ const AllDms = () => {
   const currentuser = useSelector((state) => state.currentuser);
   const directMessages = useSelector((state) => state.directMessages);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,9 +87,30 @@ const AllDms = () => {
 
       setUsers(users);
     }
-    
+
     if (term.length) {
       fetchUsers(term);
+    }
+  }
+
+  const handleDirectMessage = (user) => () => {
+    // does user exist in a channel already
+    let dm;
+    for (let id of directMessages.ids) {
+      if (directMessages.dict[id].otherUser.displayName === user.displayName) {
+        dm = directMessages.dict[id];
+        break;
+      }
+    }
+    console.log('handleDirectMessage', dm);
+
+    if (dm) {
+      history.push(`/channels/${dm.id}`);
+    } else {
+      (async(user) => {
+        const dm = await dispatch(createDmChannelThunk(user));
+        history.push(`/channels/${dm.id}`);
+      })(user);
     }
   }
 
@@ -100,10 +123,19 @@ const AllDms = () => {
         <label>To:</label>
         <input type="text" value={searchTerm} onChange={search}
           placeholder="Type the name of a person"
-          className={classes.searchBar} />
-        {users.length ? 
+          className={classes.searchBar}
+        />
+        {users.length ?
           users.map(user => (
-            <div>{user.displayName}</div>
+            <ListItem
+              button
+              onClick={handleDirectMessage(user)}
+              component='div'
+              key={`${user.id}`}
+              className={classes.channel}
+            >
+              <div>{user.displayName}</div>
+            </ListItem>
           )) :
           null
         }
