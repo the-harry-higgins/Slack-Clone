@@ -107,7 +107,7 @@ const AllDms = () => {
     if (dm) {
       history.push(`/channels/${dm.id}`);
     } else {
-      (async(user) => {
+      (async (user) => {
         const dm = await dispatch(createDmChannelThunk(user));
         history.push(`/channels/${dm.id}`);
       })(user);
@@ -151,7 +151,17 @@ const AllDms = () => {
               className={classes.channel}
               divider
             >
-
+              <div>
+                <div>
+                  {dm.otherUser.displayName}
+                </div>
+                <div>
+                  {dm.lastMessage ?
+                    dm.lastMessage.content :
+                    null
+                  }
+                </div>
+              </div>
             </ListItem>
           )) :
           null

@@ -50,12 +50,15 @@ export default function ChannelFeed() {
 
   return (
     <Container className={classes.root}>
-      <Typography variant='h4'>{currentchannel.name}</Typography>
+      {currentchannel.channelTypeId === 3 ?
+        <Typography variant='h4'>{currentchannel.otherUser.displayName}</Typography> :
+        <Typography variant='h4'>{currentchannel.name}</Typography>
+      }
       <List className={classes.messageList}>
         {messages.map(message => {
           return (
             <React.Fragment key={`fragment-${message.id}`}>
-              <Divider key={`divider-${message.id}`}/>
+              <Divider key={`divider-${message.id}`} />
               <MessageCard
                 key={message.id}
                 id={message.id}

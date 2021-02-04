@@ -51,8 +51,6 @@ const SideBar = () => {
     setOpenDms(!openDms);
   };
 
-  // if (Object.keys(channels).length === 0) return null;
-
   return (
     <>
       <List className={classes.root}>
@@ -126,7 +124,7 @@ const SideBar = () => {
                   divider
                 >
                   <Typography className={directMessages.dict[id].notification ? classes.notify : ''}>
-                    {`# ${directMessages.dict[id].name}`}
+                    {`# ${directMessages.dict[id].otherUser.displayName}`}
                   </Typography>
                 </ListItem>
               )) :
