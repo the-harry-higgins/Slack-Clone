@@ -6,12 +6,12 @@ import { CssBaseline } from '@material-ui/core';
 import { loadToken } from "../store/actions/authentication";
 import { ProtectedRoute, PrivateRoute } from "../utils/route-utils";
 import Theme from './Theme';
-import Login from './Login';
-import SignUp from './SignUp';
-import Slack from './Slack';
+import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
+import MainPage from './Pages/MainPage';
 
 
-const App = () => {
+const AppRouter = () => {
   const isNotLoggedIn = useSelector((state) => !state.authentication.token);
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ const App = () => {
             <PrivateRoute
               path="/"
               isNotLoggedIn={isNotLoggedIn}
-              component={Slack}
+              component={MainPage}
             />
             <Redirect to="/" />
           </Switch>
@@ -50,4 +50,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default AppRouter;

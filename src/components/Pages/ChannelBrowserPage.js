@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Typography, List, ListItem } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { baseAPIUrl } from "../config";
+
+import { Typography, List, ListItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { baseAPIUrl } from "../../config";
 import {
   joinChannelThunk, leaveChannelThunk, deleteChannelThunk, createChannelThunk
-} from '../store/actions/channels';
+} from '../../store/actions/channels';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ChannelBrowser = () => {
+const ChannelBrowserPage = () => {
   const classes = useStyles();
 
   const [allChannels, setAllChannels] = useState([]);
@@ -142,4 +144,4 @@ const ChannelBrowser = () => {
   )
 }
 
-export default ChannelBrowser;
+export default ChannelBrowserPage;

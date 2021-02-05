@@ -1,11 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { Avatar, IconButton, Menu, MenuItem } from '@material-ui/core';
 // import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { logout } from '../store/actions/authentication';
+import { logout } from '../../store/actions/authentication';
 
 // const useStyles = makeStyles((theme) => ({
 // }));

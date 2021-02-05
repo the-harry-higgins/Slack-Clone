@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Nav from './Nav';
-import ResponsiveDrawer from './ResponsiveDrawer';
-import ChannelFeed from './ChannelFeed';
-import ChannelBrowser from './ChannelBrowser';
-import AllDms from './AllDms';
+import Nav from '../Nav/Nav';
+import SidebarDrawer from '../Sidebar/SidebarDrawer';
+import FeedPage from './FeedPage';
+import ChannelBrowserPage from './ChannelBrowserPage';
+import AllDMsPage from './AllDMsPage';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-function Slack(props) {
+const MainPage = () => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -29,20 +29,20 @@ function Slack(props) {
   return (
     <Box display='flex'>
       <Nav handleDrawerToggle={handleDrawerToggle}/>
-      <ResponsiveDrawer handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
+      <SidebarDrawer handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
           <Route
             exact={true}
             path="/channels/:id"
-            render={(props) => <ChannelFeed {...props} />}
+            render={(props) => <FeedPage {...props} />}
           />
           <Route exact={true} path="/browse-channels">
-            <ChannelBrowser/>
+            <ChannelBrowserPage/>
           </Route>
           <Route exact={true} path="/all-dms">
-            <AllDms />
+            <AllDMsPage />
           </Route>
           <Redirect to="/" />
         </Switch>
@@ -51,4 +51,4 @@ function Slack(props) {
   );
 }
 
-export default Slack;
+export default MainPage;

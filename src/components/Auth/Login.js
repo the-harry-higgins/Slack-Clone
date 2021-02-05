@@ -1,33 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { 
+  Avatar, Box, Button, Container, Grid, Link, TextField, Typography 
+} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 
+import { login } from "../../store/actions/authentication";
 import Copyright from './Copyright';
-import AuthStyles from '../styles/AuthStyles';
-import { signUp } from '../store/actions/authentication';
+import useStyles from './AuthStyles';
 
-export default function SignUp() {
-  const classes = AuthStyles();
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = () => {
+  const classes = useStyles();
+  const [email, setEmail] = useState("demouser@demo.com");
+  const [password, setPassword] = useState("password");
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signUp(displayName, email, password));
-  };
-
-  const updateDisplayName = (e) => {
-    setDisplayName(e.target.value);
+    dispatch(login(email, password));
   };
 
   const updateEmail = (e) => {
@@ -38,6 +28,7 @@ export default function SignUp() {
     setPassword(e.target.value);
   };
 
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -45,22 +36,9 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
-            autoComplete="fname"
-            name="displayName"
-            variant="outlined"
-            required
-            fullWidth
-            id="displayName"
-            label="Display Name"
-            autoFocus
-            margin="normal"
-            value={displayName}
-            onChange={updateDisplayName}
-          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,7 +48,8 @@ export default function SignUp() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            type="email"
+            autoFocus
+            type="text"
             value={email}
             onChange={updateEmail}
           />
@@ -94,20 +73,22 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Sign In
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link href="/login" variant="body2">
-                Already have an account? Sign in
+              <Link href="/signup" variant="body2">
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
+      <Box mt={8}>
         <Copyright />
       </Box>
     </Container>
   );
-}
+};
+
+export default Login;

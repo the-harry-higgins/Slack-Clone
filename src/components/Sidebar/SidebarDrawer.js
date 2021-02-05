@@ -1,6 +1,5 @@
 import React from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
+import { Drawer, Hidden } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import SideBar from './SideBar';
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ResponsiveDrawer = ({ handleDrawerToggle, mobileOpen }) => {
+const SidebarDrawer = ({ handleDrawerToggle, mobileOpen }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -60,4 +59,4 @@ const ResponsiveDrawer = ({ handleDrawerToggle, mobileOpen }) => {
   );
 }
 
-export default ResponsiveDrawer;
+export default SidebarDrawer;

@@ -1,17 +1,12 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
-import Collapse from '@material-ui/core/Collapse';
+import { Collapse, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ForumIcon from '@material-ui/icons/Forum';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
 import { NavLink } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {

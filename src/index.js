@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import io from "socket.io-client";
 
-import App from './components/App';
+import AppRouter from './components/AppRouter';
 import configureStore from './store/configureStore';
 import { baseUrl } from "./config";
 
@@ -14,12 +14,16 @@ socket.on('error', (error) => {
   console.error(error);
 });
 
+socket.on('disconnect', () => {
+  console.log(`${socket.id} disconnected`);
+});
+
 const store = configureStore({ socket });
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <AppRouter />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
