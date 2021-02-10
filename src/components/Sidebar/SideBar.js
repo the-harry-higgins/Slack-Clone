@@ -11,13 +11,13 @@ import { NavLink } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    height: '100%',
+    // height: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.grey[300]
   },
-  folder: {
-    color: theme.palette.primary.contrastText
+  default: {
+    color: theme.palette.grey[300]
   },
   nested: {
     paddingLeft: theme.spacing(4),
@@ -55,7 +55,7 @@ const SideBar = () => {
           to={`/all-dms`}
         >
           <ListItemIcon>
-            <SearchIcon className={classes.folder} />
+            <SearchIcon className={classes.default} />
           </ListItemIcon>
           <Typography>All DMs</Typography>
         </ListItem>
@@ -65,7 +65,7 @@ const SideBar = () => {
           to={`/browse-channels`}
         >
           <ListItemIcon>
-            <ForumIcon className={classes.folder} />
+            <ForumIcon className={classes.default} />
           </ListItemIcon>
           <Typography>Channel browser</Typography>
         </ListItem>
@@ -73,8 +73,8 @@ const SideBar = () => {
         <ListItem button onClick={handleChannelsClick}>
           <ListItemIcon>
             {openChannels ?
-              <ExpandLess className={classes.folder} /> :
-              <ExpandMore className={classes.folder} />
+              <ExpandLess className={classes.default} /> :
+              <ExpandMore className={classes.default} />
             }
           </ListItemIcon>
           <ListItemText primary="Channels" />
@@ -105,8 +105,8 @@ const SideBar = () => {
         <ListItem button onClick={handleDmsClick}>
           <ListItemIcon>
             {openDms ?
-              <ExpandLess className={classes.folder} /> :
-              <ExpandMore className={classes.folder} />
+              <ExpandLess className={classes.default} /> :
+              <ExpandMore className={classes.default} />
             }
           </ListItemIcon>
           <ListItemText primary="Direct messages" />

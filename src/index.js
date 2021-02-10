@@ -14,8 +14,12 @@ socket.on('error', (error) => {
   console.error(error);
 });
 
+socket.on('connect', () => {
+  console.log(`${socket.id} connected`);
+});
+
 socket.on('disconnect', () => {
-  console.log(`${socket} disconnected`);
+  console.log(`${socket.id} disconnected`);
 });
 
 const store = configureStore({ socket });
