@@ -15,7 +15,7 @@ socket.on('error', (error) => {
 });
 
 socket.on('disconnect', () => {
-  console.log(`${socket.id} disconnected`);
+  console.log(`${socket} disconnected`);
 });
 
 const store = configureStore({ socket });

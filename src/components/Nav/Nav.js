@@ -8,6 +8,8 @@ import CurrentUser from './CurrentUser';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    boxShadow: "none",
+    borderBottom: `1px solid ${theme.palette.primary.light}`,
   },
   toolbar: {
     justifyContent: 'space-between',
