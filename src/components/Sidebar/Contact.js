@@ -11,19 +11,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: theme.spacing(1),
+    // alignItems: 'center',
+    margin: theme.spacing(3),
   },
   icons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    // justifyContent: 'space-between',
     color: theme.palette.grey[300],
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
   },
   icon: {
-    margin: theme.spacing(2),
-    color: theme.palette.grey[300]
+    marginRight: theme.spacing(4),
+    color: theme.palette.grey[300],
+    width: 30
   },
   text: {
     color: theme.palette.grey[300],
@@ -47,8 +49,8 @@ export default function Contact() {
           <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/harry-higgins-82a8661bb/')} />
         </Tooltip>
       </div>
-      <Typography className={classes.text}>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from</Typography>
-      <Typography> <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></Typography>
+      <Typography className={classes.text}>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+      </Typography>
     </div>
   );
 }
