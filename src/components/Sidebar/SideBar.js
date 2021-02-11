@@ -6,6 +6,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ForumIcon from '@material-ui/icons/Forum';
 import SearchIcon from '@material-ui/icons/Search';
+import Brightness1Icon from '@material-ui/icons/Brightness1';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
   selected: {
     backgroundColor: theme.palette.secondary.main
+  },
+  channelContainer: {
+    display: 'flex'
+  },
+  notifyIcon: {
+    color: '#f75145',
+    paddingRight: theme.spacing(1)
   }
 }));
 
@@ -91,9 +99,19 @@ const SideBar = () => {
                   activeClassName={classes.selected}
                   divider
                 >
-                  <Typography className={channels.dict[id].notification ? classes.notify : ''}>
-                    {`# ${channels.dict[id].name}`}
-                  </Typography>
+                  <div className={classes.channelContainer}>
+                    {channels.dict[id].notification ?
+                      <>
+                        <Brightness1Icon fontSize='small' className={classes.notifyIcon}/>
+                        <Typography className={classes.notify}>
+                          {`# ${channels.dict[id].name}`}
+                        </Typography>
+                      </> :
+                      <Typography >
+                        {`# ${channels.dict[id].name}`}
+                      </Typography>
+                    }
+                  </div>
                 </ListItem>
               )) :
               null
@@ -123,9 +141,19 @@ const SideBar = () => {
                   activeClassName={classes.selected}
                   divider
                 >
-                  <Typography className={directMessages.dict[id].notification ? classes.notify : ''}>
-                    {`${directMessages.dict[id].otherUser.displayName}`}
-                  </Typography>
+                  <div className={classes.channelContainer}>
+                    {directMessages.dict[id].notification ?
+                      <>
+                        <Brightness1Icon fontSize='small' className={classes.notifyIcon} />
+                        <Typography className={classes.notify}>
+                          {`${directMessages.dict[id].otherUser.displayName}`}
+                        </Typography>
+                      </> :
+                      <Typography >
+                        {`${directMessages.dict[id].otherUser.displayName}`}
+                      </Typography>
+                    }
+                  </div>
                 </ListItem>
               )) :
               null
