@@ -3,6 +3,8 @@ import { Drawer, Hidden } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import SideBar from './SideBar';
+import Contact from './Contact';
+
 
 const drawerWidth = 240;
 
@@ -16,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: theme.palette.primary.main,
+  },
+  drawerContents: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -41,7 +49,10 @@ const SidebarDrawer = ({ handleDrawerToggle, mobileOpen }) => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SideBar />
+          <div className={classes.drawerContents}>
+            <SideBar />
+            <Contact />
+          </div>
         </Drawer>
       </Hidden>
       <Hidden xsDown implementation="css">
@@ -53,7 +64,10 @@ const SidebarDrawer = ({ handleDrawerToggle, mobileOpen }) => {
           open
         >
           <div className={classes.toolbar} />
-          <SideBar />
+          <div className={classes.drawerContents}>
+            <SideBar />
+            <Contact />
+          </div>
         </Drawer>
       </Hidden>
     </nav>
