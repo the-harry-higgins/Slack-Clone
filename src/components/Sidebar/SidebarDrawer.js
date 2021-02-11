@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: theme.palette.primary.main,
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,

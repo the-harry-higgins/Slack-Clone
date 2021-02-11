@@ -11,7 +11,6 @@ import { NavLink } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    // height: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.grey[300]
