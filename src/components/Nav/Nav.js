@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     width: 40,
-    // height: 
   },
   title: {
     fontSize: '1.8rem',

@@ -18,6 +18,28 @@ const AuthStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  logoContainer: {
+    backgroundColor: theme.palette.primary.light,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: `1px solid ${theme.palette.primary.main}`,
+    borderRadius: 5,
+  },
+  logo: {
+    width: 50,
+  },
+  title: {
+    fontSize: '3rem',
+    color: theme.palette.primary.contrastText,
+    fontWeight: 600,
+    marginLeft: theme.spacing(2)
+  },
+  quote: {
+    color: theme.palette.grey[600],
+    marginBottom: theme.spacing(1)
+  }
 }));
 
 export default AuthStyles;
