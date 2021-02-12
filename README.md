@@ -62,3 +62,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## Useful Resources
+
+- [Sloth Icon](https://www.flaticon.com/free-icon/sloth_3069264?term=sloth&page=1&position=6&page=1&position=6&related_id=3069264&origin=tag)
+- [Favicon Generator](https://favicon.io/favicon-converter/)
+- [Socket Client](https://socket.io/docs/v3/client-api/index.html)
