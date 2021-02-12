@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { Typography, List, ListItem, Button } from '@material-ui/core';
+import { Typography, List, ListItem, Button, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
   },
   green: {
     color: theme.palette.success.dark,
+  },
+  spaceRight: {
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -141,33 +144,44 @@ const ChannelBrowserPage = () => {
                 </div>
               </div>
               {channels.ids.includes(channel.id) ?
+                <Tooltip title="Leave Channel" arrow>
+                  <IconButton
+                    aria-label="leave-channel"
+                    component='div'
+                    className={classes.red}
+                    onClick={handleLeave(channel)}>
+                    <RemoveCircleOutlineIcon />
+                  </IconButton>
+                </Tooltip> :
+                <Tooltip title="Join Channel" arrow>
+                  <IconButton
+                    aria-label="join-channel"
+                    component='div'
+                    className={classes.green}
+                    onClick={handleJoin(channel)}>
+                    <AddCircleOutlineIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+              <Tooltip title="Delete Channel" arrow>
                 <IconButton
-                  aria-label="leave-channel"
+                  aria-label="delete"
                   component='div'
                   className={classes.red}
-                  onClick={handleLeave(channel)}>
-                  <RemoveCircleOutlineIcon />
-                </IconButton> :
-                <IconButton
-                  aria-label="join-channel"
-                  component='div'
-                  className={classes.green}
-                  onClick={handleJoin(channel)}>
-                  <AddCircleOutlineIcon />
+                  onClick={handleDelete(channel)}>
+                  <DeleteIcon />
                 </IconButton>
-              }
-              <IconButton
-                aria-label="delete"
-                component='div'
-                className={classes.red}
-                onClick={handleDelete(channel)}>
-                <DeleteIcon />
-              </IconButton>
+              </Tooltip>
             </ListItem>
           )) :
           <ListItem component='div'>
-            <Typography>Create a new channel named "{searchTerm}"?</Typography>
-            <Button onClick={handleCreate(searchTerm)}>Create</Button>
+            <Typography className={classes.spaceRight}>Create a new channel named "{searchTerm}"? </Typography>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleCreate(searchTerm)}>
+              Create
+            </Button>
           </ListItem>
         }
       </List>
