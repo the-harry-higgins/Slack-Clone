@@ -11,13 +11,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    // alignItems: 'center',
     margin: theme.spacing(3),
   },
   icons: {
-    // display: 'flex',
-    // flexWrap: 'wrap',
-    // justifyContent: 'space-between',
     color: theme.palette.grey[300],
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3),

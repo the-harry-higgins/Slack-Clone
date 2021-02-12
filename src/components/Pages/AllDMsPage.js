@@ -7,7 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { baseAPIUrl } from "../../config";
 import { createDmChannelThunk } from '../../store/actions/directMessages';
-
+import removeHTMLTags from '../../utils/removeHTMLTags';
+import MessageCard from '../MessageCard/MessageCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,7 +105,6 @@ const AllDMsPage = () => {
         break;
       }
     }
-    console.log('handleDirectMessage', dm);
 
     if (dm) {
       history.push(`/channels/${dm.id}`);
@@ -154,15 +154,15 @@ const AllDMsPage = () => {
               divider
             >
               <div>
-                <div>
-                  {dm.otherUser.displayName}
-                </div>
-                <div>
-                  {dm.lastMessage ?
-                    dm.lastMessage.content :
-                    null
-                  }
-                </div>
+                <MessageCard 
+                  id={dm.otherUser.id} 
+                  displayName={dm.otherUser.displayName}
+                  profileImage={null} 
+                  sent={dm.lastMessage ? dm.lastMessage.createdAt : dm.createdAt}
+                  content={dm.lastMessage ? 
+                    `${dm.lastMessage.User.displayName}: ${removeHTMLTags(dm.lastMessage.content)}` : 
+                    'Send the first message!'}
+                  />
               </div>
             </ListItem>
           )) :
