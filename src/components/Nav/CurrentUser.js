@@ -1,15 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Avatar, IconButton, Menu, MenuItem } from '@material-ui/core';
-// import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { logout } from '../../store/actions/authentication';
 
-// const useStyles = makeStyles((theme) => ({
-// }));
 
 const CurrentUser = ({ currentuser, logout }) => {
-  // const classes = useStyles();
-  // const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -23,7 +18,9 @@ const CurrentUser = ({ currentuser, logout }) => {
   return (
     <div>
       <IconButton onClick={handleClick} color="inherit" >
-        <Avatar alt={currentuser.displayName} src={currentuser.profileImage} />
+        <Avatar alt={currentuser.displayName} >
+          {currentuser.displayName[0].toUpperCase()}
+        </Avatar>
       </IconButton>
       <Menu
         id="simple-menu"
