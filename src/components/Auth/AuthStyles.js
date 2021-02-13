@@ -23,7 +23,7 @@ const AuthStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   logoContainer: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.main,
     width: '100%',
     display: 'flex',
     alignItems: 'center',

@@ -69,3 +69,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 - [Sloth Icon](https://www.flaticon.com/free-icon/sloth_3069264?term=sloth&page=1&position=6&page=1&position=6&related_id=3069264&origin=tag)
 - [Favicon Generator](https://favicon.io/favicon-converter/)
 - [Socket Client](https://socket.io/docs/v3/client-api/index.html)
+- [Hero Patterns](http://www.heropatterns.com/)

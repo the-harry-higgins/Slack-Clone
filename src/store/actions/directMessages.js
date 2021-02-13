@@ -1,10 +1,10 @@
 import { baseAPIUrl } from "../../config";
-import { addListenerForChannel } from "./socket";
+import { addListenerForChannel, notifyOtherUser } from "./socket";
 
-export const CREATE_DM_CHANNEL = "slack-clone/directMessages/CREATE_DM_CHANNEL";
+export const ADD_DM_CHANNEL = "slack-clone/directMessages/ADD_DM_CHANNEL";
 
-export const createDmChannel = dmChannel => ({
-  type: CREATE_DM_CHANNEL,
+export const addDmChannel = dmChannel => ({
+  type: ADD_DM_CHANNEL,
   dmChannel,
 });
 
@@ -23,8 +23,9 @@ export const createDmChannelThunk = (otherUser) => async (dispatch, getState) =>
 
   if (response.ok) {
     const dmChannel = await response.json();
-    dispatch(createDmChannel(dmChannel));
+    dispatch(addDmChannel(dmChannel));
     dispatch(addListenerForChannel(dmChannel));
+    dispatch(notifyOtherUser(dmChannel));
 
     return dmChannel;
   }

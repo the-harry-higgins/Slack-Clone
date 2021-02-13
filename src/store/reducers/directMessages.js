@@ -1,6 +1,6 @@
 import { SET_LOGIN_DATA } from "../actions/authentication";
 import { SET_CHANNEL_NOTIFICATION } from "../actions/channels";
-import { CREATE_DM_CHANNEL } from '../actions/directMessages';
+import { ADD_DM_CHANNEL } from '../actions/directMessages';
 
 export default function reducer(state = {}, action) {
   switch (action.type) {
@@ -25,7 +25,7 @@ export default function reducer(state = {}, action) {
         dict: { ...state.dict, [action.id]: updatedChannel }
       };
 
-    case CREATE_DM_CHANNEL:
+    case ADD_DM_CHANNEL:
       const _ids = [...state.ids]
       _ids.unshift(action.dmChannel.id);
 

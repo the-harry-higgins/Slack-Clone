@@ -28,12 +28,6 @@ export default function reducer(state = {}, action) {
         dict: {...state.dict, [action.id]: updatedChannel}
       };
 
-    case JOIN_CHANNEL:
-      return {
-        ids: [...state.ids, action.channel.id],
-        dict: {...state.dict, [action.channel.id]: action.channel}
-      };
-
     case DELETE_CHANNEL:
     case LEAVE_CHANNEL:
       const ids = [...state.ids]
@@ -47,6 +41,7 @@ export default function reducer(state = {}, action) {
         dict
       }
 
+    case JOIN_CHANNEL:
     case CREATE_CHANNEL:
       const _ids = [...state.ids]
       _ids.unshift(action.channel.id);
