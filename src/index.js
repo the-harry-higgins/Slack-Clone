@@ -7,6 +7,8 @@ import AppRouter from './components/AppRouter';
 import configureStore from './store/configureStore';
 import { baseUrl } from "./config";
 
+import './index.css';
+
 // create a new connection to the socket
 const socket = io.connect(baseUrl);
 

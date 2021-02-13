@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core'
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { Typography } from '@material-ui/core';
+
 import Nav from '../Nav/Nav';
 import SidebarDrawer from '../Sidebar/SidebarDrawer';
 import FeedPage from './FeedPage';
@@ -16,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
+  text: {
+    position: 'fixed',
+    right: 0,
+    bottom: 0,
+    fontSize: '0.5rem'
+  }
 }));
 
 const MainPage = () => {
@@ -46,6 +54,8 @@ const MainPage = () => {
           </Route>
           <Redirect to="/" />
         </Switch>
+        <Typography className={classes.text}>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </Typography>
       </main>
     </Box>
   );

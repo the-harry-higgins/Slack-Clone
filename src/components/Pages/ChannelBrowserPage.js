@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor: theme.palette.grey[100],
+    padding: theme.spacing(2),
+    border: `1px solid ${theme.palette.primary.light}`,
+    borderRadius: 5,
   },
   title: {
     paddingBottom: theme.spacing(2),

@@ -14,13 +14,19 @@ import MessageForm from '../MessageForm/MessageForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%'
+    width: '100%',
+    height: `calc(100vh - 112px)`,
+    backgroundColor: theme.palette.grey[100],
+    padding: theme.spacing(2),
+    border: `1px solid ${theme.palette.primary.light}`,
+    borderRadius: 5,
   },
   messageList: {
-    height: '50vh',
+    height: 'calc(100% - 174px)',
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
-    overflow: 'auto'
+    boxSizing: 'border-box',
+    overflow: 'auto',
+    marginTop: theme.spacing(2),
   },
   anchor: {
     height: '0px'
@@ -53,8 +59,8 @@ export default function FeedPage() {
   return (
     <Container className={classes.root}>
       {currentchannel.type === 'directmessage' ?
-        <Typography variant='h4'>{currentchannel.otherUser.displayName}</Typography> :
-        <Typography variant='h4'>{currentchannel.name}</Typography>
+        <Typography variant='h6'>{currentchannel.otherUser.displayName}</Typography> :
+        <Typography variant='h6'>{currentchannel.name}</Typography>
       }
       <List className={classes.messageList}>
         {messages.map(message => {

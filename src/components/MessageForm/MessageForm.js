@@ -22,10 +22,10 @@ const MessageForm = () => {
     <form onSubmit={handleSubmit} >
       <ReactQuill value={content} onChange={updateBody}></ReactQuill>
       <Button 
-        bgcolor="primary.main"
         color="primary"
         variant="contained"
         type="submit"
+        style={{marginTop: 12}}
       >
         Submit
       </Button>

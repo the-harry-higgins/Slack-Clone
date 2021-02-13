@@ -6,6 +6,10 @@ const AuthStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: theme.palette.grey[100],
+    padding: theme.spacing(2),
+    border: `1px solid ${theme.palette.primary.light}`,
+    borderRadius: 5,
   },
   avatar: {
     margin: theme.spacing(1),

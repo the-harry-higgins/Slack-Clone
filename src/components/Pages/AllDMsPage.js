@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    backgroundColor: theme.palette.grey[100],
+    padding: theme.spacing(2),
+    border: `1px solid ${theme.palette.primary.light}`,
+    borderRadius: 5,
   },
   title: {
     paddingBottom: theme.spacing(2),
@@ -122,7 +126,7 @@ const AllDMsPage = () => {
         <Typography variant='h6'>All direct messages</Typography>
       </div>
       <div className={classes.searchDiv}>
-        <label>To:</label>
+        <label><Typography>To:</Typography></label>
         <input type="text" value={searchTerm} onChange={search}
           placeholder="Type the name of a person"
           className={classes.searchBar}
@@ -136,7 +140,9 @@ const AllDMsPage = () => {
               key={`${user.id}`}
               className={classes.channel}
             >
-              <div>{user.displayName}</div>
+              <div>
+                <Typography variant="body2">{user.displayName}</Typography>
+              </div>
             </ListItem>
           )) :
           null
@@ -154,15 +160,15 @@ const AllDMsPage = () => {
               divider
             >
               <div>
-                <MessageCard 
-                  id={dm.otherUser.id} 
+                <MessageCard
+                  id={dm.otherUser.id}
                   displayName={dm.otherUser.displayName}
-                  profileImage={null} 
+                  profileImage={null}
                   sent={dm.lastMessage ? dm.lastMessage.createdAt : dm.createdAt}
-                  content={dm.lastMessage ? 
-                    `${dm.lastMessage.User.displayName}: ${removeHTMLTags(dm.lastMessage.content)}` : 
+                  content={dm.lastMessage ?
+                    `${dm.lastMessage.User.displayName}: ${removeHTMLTags(dm.lastMessage.content)}` :
                     'Send the first message!'}
-                  />
+                />
               </div>
             </ListItem>
           )) :
