@@ -30,7 +30,7 @@ export const joinChannelThunk = (channel) => async (dispatch, getState) => {
   });
 
   if (response.ok) {
-    const data = await response.json();
+    await response.json();
     dispatch(joinChannel(channel));
     dispatch(addListenerForChannel(channel));
   }

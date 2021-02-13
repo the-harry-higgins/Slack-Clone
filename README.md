@@ -1,4 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sloth
+
+[Live Link](https://master.d3izqolo2r3a78.amplifyapp.com/)
+
+[Backend Repo](https://github.com/the-harry-higgins/Slack-Clone-Backend)
+
+## Summary
+
+A clone of Slack with search, channels, direct messages, and notifications.
+
+## Technologies Used
+
+### Frontend
+
+- JavaScript
+- React
+- Redux
+- Socket.io
+- Material-UI
+- AWS Amplify
+
+### Backend
+
+- NodeJS
+- Express
+- Socket.io
+- PostgreSQL
+- Heroku
+
+## Features
+
+***
+
+## Dev Stuff
+
+### Getting Started
+
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/the-harry-higgins/Slack-Clone-Frontend.git
+    ```
+
+2. Install dependencies
+    ```bash
+    npm install
+    ```
+3. Start your express app
+    ```bash
+    npm start
+    ```
+4. Navigate to your app running on http://localhost:3000
+5. Follow the instructions in the README of the backend repo to start the backend server.
+
+
+### Useful Resources
+
+- [Database Diagram](./documentation/schema.png)
+- [Feature List](./documentation/Features.md)
+- [Sloth Icon](https://www.flaticon.com/free-icon/sloth_3069264?term=sloth&page=1&position=6&page=1&position=6&related_id=3069264&origin=tag)
+- [Favicon Generator](https://favicon.io/favicon-converter/)
+- [Socket Client](https://socket.io/docs/v3/client-api/index.html)
+- [Hero Patterns](http://www.heropatterns.com/)
+
+***
 
 ## Available Scripts
 
@@ -62,11 +125,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-## Useful Resources
-
-- [Sloth Icon](https://www.flaticon.com/free-icon/sloth_3069264?term=sloth&page=1&position=6&page=1&position=6&related_id=3069264&origin=tag)
-- [Favicon Generator](https://favicon.io/favicon-converter/)
-- [Socket Client](https://socket.io/docs/v3/client-api/index.html)
-- [Hero Patterns](http://www.heropatterns.com/)

@@ -15,6 +15,8 @@ const CurrentUser = ({ currentuser, logout }) => {
     setAnchorEl(null);
   };
 
+  if (!currentuser.displayName) return null;
+
   return (
     <div>
       <IconButton onClick={handleClick} color="inherit" >

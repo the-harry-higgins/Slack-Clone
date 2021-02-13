@@ -141,10 +141,14 @@ const ChannelBrowserPage = () => {
             >
               <div className={classes.channelInfo}>
                 <div>
-                  {channel.name}
+                  <Typography>
+                    {channel.name}
+                  </Typography>
                 </div>
                 <div>
-                  {channel.members} members
+                  <Typography>
+                    {channel.members} members
+                  </Typography>
                 </div>
               </div>
               {channels.ids.includes(channel.id) ?
