@@ -48,8 +48,9 @@ export default function FeedPage() {
     dispatch(updateCurrentChannel(id));
     dispatch(getMessages(id));
     if (currentchannel.notification) {
-      dispatch(setChannelNotification(id))
+      dispatch(setChannelNotification(id, false));
     }
+    return () => dispatch(updateCurrentChannel(null));
   }, [id, currentchannel.notification, dispatch]);
 
   useEffect(() => {

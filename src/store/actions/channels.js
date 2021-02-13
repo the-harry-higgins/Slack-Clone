@@ -9,7 +9,7 @@ export const DELETE_CHANNEL = "slack-clone/channels/DELETE_CHANNEL";
 export const CREATE_CHANNEL = "slack-clone/channels/CREATE_CHANNEL";
 
 export const setChannels = channels => ({ type: SET_CHANNELS, channels });
-export const setChannelNotification = id => ({ type: SET_CHANNEL_NOTIFICATION, id })
+export const setChannelNotification = (id, bool) => ({ type: SET_CHANNEL_NOTIFICATION, id, bool })
 export const joinChannel = channel => ({ type: JOIN_CHANNEL, channel });
 export const leaveChannel = channel => ({ type: LEAVE_CHANNEL, channel });
 export const deleteChannel = channel => ({ type: DELETE_CHANNEL, channel });

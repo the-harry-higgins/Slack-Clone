@@ -22,7 +22,7 @@ export default function reducer(state = {}, action) {
     
     case SET_CHANNEL_NOTIFICATION:
       const updatedChannel = {...state.dict[action.id]}
-      updatedChannel.notification = !updatedChannel.notification;
+      updatedChannel.notification = action.bool;
       return { 
         ids: [...state.ids], 
         dict: {...state.dict, [action.id]: updatedChannel}

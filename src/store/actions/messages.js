@@ -28,6 +28,6 @@ export const handleNewMessage = (message, id) => async (dispatch, getState) => {
     dispatch(addMessage(message));
   } else {
     // Set notification setting on the channel
-    dispatch(setChannelNotification(id));
+    dispatch(setChannelNotification(id, true));
   }
 }
