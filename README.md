@@ -2,7 +2,7 @@
 
 [Live Link](https://master.d3izqolo2r3a78.amplifyapp.com/)
 
-[Backend Repo](https://github.com/the-harry-higgins/Slack-Clone-Backend)
+[Backend Repo](https://github.com/the-harry-higgins/Sloth-Backend)
 
 ## Summary
 
@@ -50,7 +50,7 @@ A clone of Slack with search, channels, direct messages, and notifications.
 
 ### Useful Resources
 
-- [Database Diagram](./documentation/schema.png)
+- [Database Diagram](./documentation/Schema.md)
 - [Feature List](./documentation/Features.md)
 - [Sloth Icon](https://www.flaticon.com/free-icon/sloth_3069264?term=sloth&page=1&position=6&page=1&position=6&related_id=3069264&origin=tag)
 - [Favicon Generator](https://favicon.io/favicon-converter/)
