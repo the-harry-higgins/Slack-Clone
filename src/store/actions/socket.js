@@ -12,45 +12,40 @@ export const setupListeners = () => async (dispatch, getState) => {
 
   socket.emit('join personal room', currentuser.id);
 
+  socket.emit('join rooms', [...channels.ids, ...directMessages.ids]);
+
   socket.on(`new dm channel`, dmChannel => {
     dispatch(addDmChannel(dmChannel));
     dispatch(addListenerForChannel(dmChannel));
   })
 
-  socket.emit('join rooms', [...channels.ids, ...directMessages.ids]);
-
-  channels.ids.forEach(id => {
-    socket.on(id, (message) => {
-      dispatch(handleNewMessage(message, id));
-    });
+  socket.on('message', ({ channel, message }) => {
+    dispatch(handleNewMessage(message, channel));
   });
-
-  directMessages.ids.forEach(id => {
-    socket.on(id, (message) => {
-      dispatch(handleNewMessage(message, id));
-    });
-  });
-
 }
 
-export const addListenerForChannel = (channel) => async(dispatch, getState) => {
+export const addListenerForChannel = (channel) => async (dispatch, getState) => {
   const { socket } = getState();
+
   socket.emit('join rooms', [channel.id]);
-  socket.on(channel.id, (message) => {
-    dispatch(handleNewMessage(message, channel.id));
-  });
 }
 
 
 export const removeListenerForChannel = (channel) => async (dispatch, getState) => {
   const { socket } = getState();
+
   socket.emit('leave room', channel.id);
 }
 
 
 export const sendMessage = (message) => async (dispatch, getState) => {
   const { currentchannel, currentuser, socket } = getState();
-  socket.emit(currentchannel.id, { user: currentuser, message });
+
+  socket.emit('message', {
+    channel: currentchannel.id,
+    user: currentuser,
+    message
+  });
 }
 
 
@@ -59,7 +54,7 @@ export const notifyOtherUser = (dmChannel) => async (dispatch, getState) => {
 
   const to = dmChannel.otherUser.id;
 
-  const channel = {...dmChannel}
+  const channel = { ...dmChannel }
 
   channel.otherUser = currentuser;
   channel.notification = true;
