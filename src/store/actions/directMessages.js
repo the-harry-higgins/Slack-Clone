@@ -23,7 +23,6 @@ export const createDmChannelThunk = (otherUser) => async (dispatch, getState) =>
 
   if (response.ok) {
     const dmChannel = await response.json();
-    console.log(dmChannel);
     dispatch(createDmChannel(dmChannel));
     dispatch(addListenerForChannel(dmChannel));
 
