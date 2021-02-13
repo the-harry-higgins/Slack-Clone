@@ -59,9 +59,11 @@ export const notifyOtherUser = (dmChannel) => async (dispatch, getState) => {
 
   const to = dmChannel.otherUser.id;
 
-  dmChannel.otherUser = currentuser;
-  dmChannel.notification = true;
+  const channel = {...dmChannel}
 
-  socket.emit('notify user', { channel: dmChannel, to });
+  channel.otherUser = currentuser;
+  channel.notification = true;
+
+  socket.emit('notify user', { channel, to });
 }
 

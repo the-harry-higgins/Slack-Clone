@@ -35,19 +35,15 @@ A clone of Slack with search, channels, direct messages, and notifications.
 
 ### Getting Started
 
-1. Clone this repository:
-    ```bash
-    git clone https://github.com/the-harry-higgins/Slack-Clone-Frontend.git
-    ```
+1. Clone this repository: 
+   #### `git clone https://github.com/the-harry-higgins/Slack-Clone-Frontend.git`
 
 2. Install dependencies
-    ```bash
-    npm install
-    ```
+    #### `npm install`
+
 3. Start your express app
-    ```bash
-    npm start
-    ```
+    #### `npm start`
+
 4. Navigate to your app running on http://localhost:3000
 5. Follow the instructions in the README of the backend repo to start the backend server.
 
