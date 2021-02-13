@@ -8,6 +8,8 @@ export const setSocket = socket => ({ type: SET_SOCKET, socket });
 export const setupListeners = () => async (dispatch, getState) => {
   const { channels, directMessages, socket, currentuser } = getState();
 
+  socket.connect();
+
   socket.emit('join personal room', currentuser.id);
 
   socket.on(`new dm channel`, dmChannel => {
@@ -41,12 +43,8 @@ export const addListenerForChannel = (channel) => async(dispatch, getState) => {
 
 
 export const removeListenerForChannel = (channel) => async (dispatch, getState) => {
-  // const { socket } = getState();
-  // socket.emit('join rooms', [channel.id]);
-  // socket.on(channel.id, (message) => {
-  //   dispatch(handleNewMessage(message, channel.id));
-  // });
-  // TODO: exit room
+  const { socket } = getState();
+  socket.emit('leave room', channel.id);
 }
 
 
@@ -58,13 +56,12 @@ export const sendMessage = (message) => async (dispatch, getState) => {
 
 export const notifyOtherUser = (dmChannel) => async (dispatch, getState) => {
   const { socket, currentuser } = getState();
-  console.log('in Notify Other User');
+
   const to = dmChannel.otherUser.id;
+
   dmChannel.otherUser = currentuser;
   dmChannel.notification = true;
-  socket.emit('notify user', { 
-    channel: dmChannel, 
-    to
-  });
+
+  socket.emit('notify user', { channel: dmChannel, to });
 }
 

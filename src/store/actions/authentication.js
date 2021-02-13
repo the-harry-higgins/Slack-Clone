@@ -74,5 +74,6 @@ export const signUp = (displayName, email, password) => async (dispatch) => {
     window.localStorage.setItem(TOKEN_KEY, data.token);
     dispatch(setToken(data.token));
     dispatch(setLoginData(data));
+    dispatch(setupListeners());
   }
 };
